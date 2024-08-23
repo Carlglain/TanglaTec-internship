@@ -1,3 +1,4 @@
+//Looking for max using gaussian fit in c++
 #include <iostream>
 #include <vector>
 #include <string>
@@ -9,6 +10,7 @@
 double gaussian_pdf(double x, double mu, double sigma, double amplitude) {
     return amplitude * exp(-(x - mu) * (x - mu) / (2.0 * sigma * sigma));
 }
+
 
 // Function to calculate mean and standard deviation
 std::tuple<double, double> calculateMeanAndSigma(const std::vector<double>& values) {
@@ -22,7 +24,7 @@ std::tuple<double, double> calculateMeanAndSigma(const std::vector<double>& valu
     for (double value : values) {
         variance_sum += (value - mean) * (value - mean);
     }
-    double variance = variance_sum / values.size();
+    double variance = variance_sum / (values.size() - 1); // Corrected division
     double sigma = sqrt(variance);
 
     return std::make_tuple(mean, sigma);
@@ -57,6 +59,5 @@ std::vector<double> extractValues(const std::vector<std::vector<std::string>>& d
 
 // Function to calculate Gaussian peak value and the value of x where it occurs
 std::tuple<double, double> getGaussianPeak(double mu, double sigma, double amplitude) {
-    double peak_value = gaussian_pdf(mu, mu, sigma, amplitude);  // x = mu for the peak
-    return std::make_tuple(peak_value, mu);
+    return std::make_tuple(amplitude, mu);
 }

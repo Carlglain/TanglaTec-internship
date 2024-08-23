@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+
 #include <Eigen/Dense> //template library for linear algebra
 
 // Class to hold the data read from the CSV file

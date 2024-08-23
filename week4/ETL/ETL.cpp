@@ -13,8 +13,7 @@ std::vector<std::vector<std::string>> ETL::readCSV()
 
     std::string line = "";
 
-    while (getline(file, line))
-    {
+    while (getline(file, line)) {
         std::vector<std::string> vec;
         boost::algorithm::split(vec, line, boost::is_any_of(delimiter));
         dataString.push_back(vec);
@@ -48,23 +47,22 @@ Eigen::MatrixXd ETL::CSVtoEigen(std::vector<std::vector<std::string>> dataset, i
 auto ETL::Mean(Eigen::MatrixXd data) -> decltype(data.colwise().mean())
 {
     return data.colwise().mean();
-}
+}	
 
 auto ETL::Std(Eigen::MatrixXd data) -> decltype(((data.array().square().colwise().sum()) / (data.rows() - 1)).sqrt())
 {
     return ((data.array().square().colwise().sum()) / (data.rows() - 1)).sqrt();
 }
 
-Eigen::MatrixXd ETL::Normalize(Eigen::MatrixXd data, bool normalizeTarget)
-{
+Eigen::MatrixXd ETL::Normalize(Eigen::MatrixXd data, bool normalizeTarget){
 
     Eigen::MatrixXd dataNorm;
     if (normalizeTarget == true)
     {
-        dataNorm = data;
+        return dataNorm = data;
     }
     else
     {
-        dataNorm = data.leftCols(data.cols() - 1);
+       return dataNorm = data.leftCols(data.cols() - 1);
     }
 }
